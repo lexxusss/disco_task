@@ -1,33 +1,29 @@
 <?php
 
-namespace App\Events;
+namespace App\Listeners\Disco\Dances\DancesTypes;
 
-use App\Listeners\Disco\Dances\Song;
+
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
 
-class DiscoEvent
+abstract class Dance
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $currentSong;
+    protected $motions;
 
-    /**
-     * DiscoEvent constructor.
-     * Create a new event instance.
-     *
-     * @param $song
-     */
-    public function __construct(Song $song)
+    public function __construct()
     {
-        $this->currentSong = $song;
+        $this->motions = new Collection();
+    }
 
-        foreach ($this->currentSong->track['types'] as $type) {
-            event(new $type);
-        }
+    public function __toString()
+    {
+        return $this->motions->implode(', ');
     }
 
     /**

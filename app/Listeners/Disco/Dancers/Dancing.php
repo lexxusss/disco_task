@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners\Disco;
+namespace App\Listeners\Disco\Dancers;
 
 
 interface Dancing
