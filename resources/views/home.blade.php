@@ -6,6 +6,7 @@
             <div class="col-sm-6">
 
                 <h2>Current track:</h2>
+                <h4>{{ $currentTrack['title'] }}</h4>
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="{{ $currentTrack['path'] }}"></iframe>
                 </div>
@@ -16,7 +17,7 @@
                 <h2>Tracks:</h2>
                 <ul>
                     @foreach($tracks as $track)
-                        <li>
+                        <li class="{{ $track['id'] == $currentTrack['id'] ? 'bg-danger' : '' }}">
                             <a href="{{ route('disco', ['track_id' => $track['id']]) }}">{{ $track['title'] }} ({{ \Tracks::musicTypes($track['id']) }})</a>
                         </li>
                     @endforeach
