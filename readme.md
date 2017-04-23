@@ -1,9 +1,8 @@
-
 ## Run Disco
 
 
 - git clone https://lexxusss@bitbucket.org/lexxusss/fix-disco-task.git
-- go to /{project DIR}/
+- cd /fix-disco-task
 - composer update
 - php artisan serve
 - open "http://127.0.0.1:8000"
