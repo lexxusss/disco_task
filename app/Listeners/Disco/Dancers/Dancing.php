@@ -5,5 +5,13 @@ namespace App\Listeners\Disco\Dancers;
 
 interface Dancing
 {
-    public function dance();
+
+    /**
+     * Dance action
+     *
+     * @param string $name
+     * @param array $motions
+     * @return string
+     */
+    static function dancing($name, $motions);
 }

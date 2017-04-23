@@ -7,14 +7,13 @@ use App\Listeners\Disco\Dancers\Alex;
 use App\Listeners\Disco\Dancers\Ivan;
 use App\Listeners\Disco\Dancers\John;
 use App\Listeners\Disco\Dancers\Mary;
-use App\Listeners\Disco\Dancers\Nobody;
 use App\Listeners\Disco\Dancers\Peter;
 use App\Listeners\Disco\Dancers\SashaGrey;
-use App\Listeners\Disco\Dances\DancesTypes\ElektroDance;
-use App\Listeners\Disco\Dances\DancesTypes\HipHop;
-use App\Listeners\Disco\Dances\DancesTypes\Listen;
-use App\Listeners\Disco\Dances\DancesTypes\Pop;
-use App\Listeners\Disco\Dances\DancesTypes\Rock;
+use App\Events\DancesTypes\ElektroDance;
+use App\Events\DancesTypes\HipHop;
+use App\Events\DancesTypes\Drink;
+use App\Events\DancesTypes\Pop;
+use App\Events\DancesTypes\Rock;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -26,28 +25,37 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         DiscoEvent::class => [],
+
         HipHop::class => [
             Mary::class,
-            Peter::class,
+            SashaGrey::class,
+            Alex::class,
         ],
         Pop::class => [
-            Mary::class,
             Peter::class,
+            SashaGrey::class,
             Ivan::class,
+            Mary::class,
         ],
         Rock::class => [
-            John::class,
             Alex::class,
+            Peter::class,
             Ivan::class,
         ],
         ElektroDance::class => [
+            John::class,
+            SashaGrey::class,
+            Alex::class,
+            Ivan::class,
+        ],
+
+        Drink::class => [
             SashaGrey::class,
             Alex::class,
             Peter::class,
             Mary::class,
-        ],
-        Listen::class => [
-            Nobody::class,
+            John::class,
+            Ivan::class,
         ],
     ];
 

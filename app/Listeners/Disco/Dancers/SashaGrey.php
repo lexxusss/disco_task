@@ -2,4 +2,8 @@
 
 namespace App\Listeners\Disco\Dancers;
 
-class SashaGrey extends Dancer {}
+use App\Listeners\Disco\Dancers\Traits\DancerMotions;
+
+class SashaGrey extends Dancer {
+    use DancerMotions;
+}

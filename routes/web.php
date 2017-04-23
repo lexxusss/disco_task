@@ -15,4 +15,4 @@
 //    return view('welcome');
 //});
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('disco');

@@ -2,4 +2,8 @@
 
 namespace App\Listeners\Disco\Dancers;
 
-class John extends Dancer {}
+use App\Listeners\Disco\Dancers\Traits\DancerMotions;
+
+class John extends Dancer {
+    use DancerMotions;
+}

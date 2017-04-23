@@ -6,7 +6,7 @@ class Song
 {
     var $track;
 
-    function __construct($track)
+    public function __construct($track)
     {
         $this->track = $track;
     }

@@ -2,11 +2,14 @@
 
 namespace App\Listeners\Disco\Dancers;
 
-use App\Listeners\Disco\Dances\DancesTypes\Dance;
+
+use App\Events\Dance;
+use App\Events\DiscoEvent;
+use App\Listeners\Disco\Dances\Motion;
 
 abstract class Dancer implements Dancing
 {
-    protected $name;
+    protected $resolver;
     protected $dance;
 
     /**
@@ -14,17 +17,27 @@ abstract class Dancer implements Dancing
      */
     public function __construct()
     {
-        $this->name = class_basename(get_called_class());
+        $this->resolver = get_called_class();
     }
 
-    /**
-     * Dance action
-     *
-     * @return string
-     */
-    public function dance()
+    protected function isDrinking()
     {
-        return $this->name . ' ' . $this->dance;
+        return !empty(($this->resolver)::$dancerMotions[Motion::LISTEN]);
+    }
+
+    protected function stopDrink()
+    {
+        unset(($this->resolver)::$dancerMotions[Motion::LISTEN]);
+    }
+
+    protected function dance()
+    {
+        $motions = $this->dance->getMotions();
+        foreach ($motions as $motion) {
+            $this->resolver::$dancerMotions[$motion] = $motion;
+        }
+
+        DiscoEvent::$dancers[$this->resolver] = ($this->resolver)::$dancerMotions;
     }
 
     /**
@@ -36,6 +49,15 @@ abstract class Dancer implements Dancing
     {
         $this->dance = new $event();
 
+        if ($this->isDrinking()) {
+            $this->stopDrink();
+        }
+
         $this->dance();
+    }
+
+    public static function dancing($name, $motions)
+    {
+        return class_basename($name) . " is: <br/>" . join(", ", $motions);
     }
 }

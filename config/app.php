@@ -226,6 +226,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Dancer' => App\Listeners\Disco\Dancers\Dancer::class,
+        'Tracks' => \App\Listeners\Disco\Dances\Tracks::class,
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Listeners\Disco\Dances\MusicType;
 use App\Listeners\Disco\Dances\Song;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,6 +16,8 @@ class DiscoEvent
 
     protected $currentSong;
 
+    public static $dancers = [];
+
     /**
      * DiscoEvent constructor.
      * Create a new event instance.
@@ -25,8 +28,11 @@ class DiscoEvent
     {
         $this->currentSong = $song;
 
-        foreach ($this->currentSong->track['types'] as $type) {
-            event(new $type);
+        $trackTypes = $this->currentSong->track['types'];
+        foreach ($trackTypes as $type) {
+            if ($type !== MusicType::DRINK) {
+                event(new $type);
+            }
         }
     }
 
