@@ -22,22 +22,25 @@ abstract class Dancer implements Dancing
 
     protected function isDrinking()
     {
-        return !empty(($this->resolver)::$dancerMotions[Motion::LISTEN]);
+        $resolver = $this->resolver;
+        return !empty($resolver::$dancerMotions[Motion::LISTEN]);
     }
 
     protected function stopDrink()
     {
-        unset(($this->resolver)::$dancerMotions[Motion::LISTEN]);
+        $resolver = $this->resolver;
+        unset($resolver::$dancerMotions[Motion::LISTEN]);
     }
 
     protected function dance()
     {
+        $resolver = $this->resolver;
         $motions = $this->dance->getMotions();
         foreach ($motions as $motion) {
-            $this->resolver::$dancerMotions[$motion] = $motion;
+            $resolver::$dancerMotions[$motion] = $motion;
         }
 
-        DiscoEvent::$dancers[$this->resolver] = ($this->resolver)::$dancerMotions;
+        DiscoEvent::$dancers[$resolver] = $resolver::$dancerMotions;
     }
 
     /**
