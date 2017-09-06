@@ -1,3 +1,10 @@
+## Disco Club
+
+Disco club emulation:
+while some song(track) is playing - people are dancing different dances
+according to their abilities and playing song.
+
+
 ## Run Disco
 
 
